@@ -169,7 +169,7 @@ htop
 ;;
 23)
 clear
-wget -q -O /usr/bin/xraychanger "https://raw.githubusercontent.com/KhaiVpn767/Xcore-custompath/main/xraychanger.sh" && chmod +x /usr/bin/xraychanger && xraychanger
+wget https://raw.githubusercontent.com/KhaiVpn767/MultiportV5/main/xraychanger.sh && chmod +x xraychanger.sh && ./xraychanger.sh
 ;;
 24)
 clear
