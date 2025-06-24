@@ -64,27 +64,17 @@ echo -e "  ${RB}05.${NC} ${YB}XRAY TROJAN TCP  ${WB}[${GB}${tr}${WB}]${NC}"
 echo -e "${BB}————————————————————————————————————————————————————————${NC}"
 echo -e "                   ${WB}»»» VPS Menu «««${NC}                 "
 echo -e "${BB}————————————————————————————————————————————————————————${NC}"
-echo -e "  ${RB}06.${NC} ${YB}INSTALL ADS BLOCK ${NC}"
-echo -e "  ${RB}07.${NC} ${YB}INSTALL TCP BBRPLUS ${NC}"
-echo -e "  ${RB}08.${NC} ${YB}ADS BLOCK MENU ${NC}"
-echo -e "  ${RB}09.${NC} ${YB}DNS CHANGER ${NC}"
-echo -e "  ${RB}10.${NC} ${YB}NETFLIX CHECKER ${NC}"
-echo -e "  ${RB}11.${NC} ${YB}LIMIT BANDWITH SPEED ${NC}"
+echo -e "  ${RB}06.${NC} ${YB}INSTALL ADS BLOCK ${NC}             ${RB}16.${NC} ${YB}RESTART VPN SERVICE ${NC}"
+echo -e "  ${RB}07.${NC} ${YB}INSTALL TCP BBRPLUS ${NC}           ${RB}17.${NC} ${YB}SPEEDTEST ${NC}"
+echo -e "  ${RB}08.${NC} ${YB}ADS BLOCK MENU ${NC}                ${RB}18.${NC} ${YB}CHECK CPU & RAM ${NC}"
+echo -e "  ${RB}09.${NC} ${YB}DNS CHANGER ${NC}                   ${RB}19.${NC} ${YB}CHECK BANDWIDTH ${NC}"
+echo -e "  ${RB}10.${NC} ${YB}NETFLIX CHECKER ${NC}               ${RB}20.${NC} ${YB}BACKUP ${NC}"
+echo -e "  ${RB}11.${NC} ${YB}LIMIT BANDWITH SPEED ${NC}          ${RB}21.${NC} ${YB}RESTORE ${NC}"
+echo -e "  ${RB}12.${NC} ${YB}CHANGE DOMAIN ${NC}                 ${RB}22.${NC} ${YB}REBOOT ${NC}"
+echo -e "  ${RB}13.${NC} ${YB}RENEW CERT XRAYS ${NC}              ${RB}23.${NC} ${YB}XRAY-CORE MENU ${NC}"
+echo -e "  ${RB}14.${NC} ${YB}CHECK VPN STATUS ${NC}              ${RB}24.${NC} ${YB}SWAPRAM MENU ${NC}"
+echo -e "  ${RB}15.${NC} ${YB}CHECK VPN PORT ${NC}                ${RB}25.${NC} ${YB}EXIT ${NC}"
 echo -e ""
-echo -e "  ${RB}12.${NC} ${YB}CHANGE DOMAIN ${NC}"
-echo -e "  ${RB}13.${NC} ${YB}RENEW CERT XRAYS ${NC}"
-echo -e "  ${RB}14.${NC} ${YB}CHECK VPN STATUS ${NC}"
-echo -e "  ${RB}15.${NC} ${YB}CHECK VPN PORT ${NC}"
-echo -e "  ${RB}16.${NC} ${YB}RESTART VPN SERVICE ${NC}"
-echo -e "  ${RB}17.${NC} ${YB}SPEEDTEST ${NC}"
-echo -e "  ${RB}18.${NC} ${YB}CHECK CPU & RAM ${NC}"
-echo -e "  ${RB}19.${NC} ${YB}CHECK BANDWIDTH ${NC}"
-echo -e "  ${RB}20.${NC} ${YB}BACKUP ${NC}"
-echo -e "  ${RB}21.${NC} ${YB}RESTORE ${NC}"
-echo -e "  ${RB}22.${NC} ${YB}REBOOT ${NC}"
-echo -e "  ${RB}23.${NC} ${YB}XRAY-CORE MENU ${NC}"
-echo -e "  ${RB}24.${NC} ${YB}SWAPRAM MENU ${NC}"
-echo -e "  ${RB}25.${NC} ${YB}EXIT ${NC}"
 echo -e "${BB}————————————————————————————————————————————————————————${NC}"
 echo -e "                 ${WB}»»» Total Bandwidth «««${NC}             "
 echo -e "${BB}————————————————————————————————————————————————————————${NC}"
@@ -169,7 +159,7 @@ htop
 ;;
 23)
 clear
-wget https://raw.githubusercontent.com/KhaiVpn767/MultiportV5/main/xraychanger.sh && chmod +x xraychanger.sh && ./xraychanger.sh
+wget -q -O /usr/bin/xraychanger "https://raw.githubusercontent.com/KhaiVpn767/Xcore-custompath/main/xraychanger.sh" && chmod +x /usr/bin/xraychanger && xraychanger
 ;;
 24)
 clear
