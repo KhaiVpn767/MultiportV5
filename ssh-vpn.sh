@@ -224,6 +224,8 @@ wget -O menu-vless "https://${Server_URL}/menu-vless.sh"
 wget -O menu-xtr "https://${Server_URL}/menu-xtr.sh"
 wget -O menu-xrt "https://${Server_URL}/menu-xrt.sh"
 wget -O certxray "https://${Server_URL}/cert.sh"
+wget -O addvls "https://raw.githubusercontent.com/KhaiVpn767/MultiportV5/main/addvls.sh"
+wget -O add-ws "https://raw.githubusercontent.com/KhaiVpn767/MultiportV5/main/add-ws.sh"
 chmod +x menu-tr
 chmod +x menu-ws
 chmod +x menu-vless
@@ -244,6 +246,8 @@ chmod +x ram
 chmod +x dns
 chmod +x nf
 chmod +x limit
+chmod +x addvls
+chmod +x add-ws
 echo "0 6 * * * root reboot" >> /etc/crontab
 echo "0 1 * * * root /usr/local/sbin/xp" >> /etc/crontab
 echo "0 2 * * * root /usr/bin/cleaner" >> /etc/crontab
