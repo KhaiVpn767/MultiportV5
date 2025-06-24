@@ -74,7 +74,7 @@ echo -e "  ${RB}12.${NC} ${YB}CHANGE DOMAIN ${NC}           ${RB}22.${NC} ${YB}R
 echo -e "  ${RB}13.${NC} ${YB}RENEW CERT XRAYS ${NC}        ${RB}23.${NC} ${YB}XRAY-CORE MENU ${NC}"
 echo -e "  ${RB}14.${NC} ${YB}CHECK VPN STATUS ${NC}        ${RB}24.${NC} ${YB}SWAPRAM MENU ${NC}"
 echo -e "  ${RB}15.${NC} ${YB}CHECK VPN PORT ${NC}          ${RB}25.${NC} ${YB}Instal/WARP ${NC}"
-echo -e "                                                   ${RB}26.${NC} ${YB}MENU WARP ${NC}"
+echo -e "                               ${RB}26.${NC} ${YB}MENU WARP ${NC}"
 echo -e ""
 echo -e "${BB}————————————————————————————————————————————————————————${NC}"
 echo -e "                 ${WB}»»» Total Bandwidth «««${NC}             "
