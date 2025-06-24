@@ -4,28 +4,6 @@ biji=`date +"%Y-%m-%d" -d "$dateFromServer"`
 ###########- COLOR CODE -##############
 echo -e " [INFO] Downloading Update File"
 sleep 2
-# hapus menu
-rm -rf ins-helium
-rm -rf bbr
-rm -rf wssgen
-rm -rf add-host
-rm -rf speedtest
-rm -rf xp
-rm -rf menu
-rm -rf status
-rm -rf info
-rm -rf restart
-rm -rf ram
-rm -rf dns
-rm -rf nf
-rm -rf limit
-rm -rf menu-tr
-rm -rf menu-ws
-rm -rf menu-vless
-rm -rf menu-xtr
-rm -rf certxray
-
-
 # download script
 cd /usr/local/sbin
 wget -O ins-helium "https://${Server_URL}/ins-helium.sh"
