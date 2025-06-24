@@ -73,7 +73,8 @@ echo -e "  ${RB}11.${NC} ${YB}LIMIT BANDWITH SPEED ${NC}    ${RB}21.${NC} ${YB}R
 echo -e "  ${RB}12.${NC} ${YB}CHANGE DOMAIN ${NC}           ${RB}22.${NC} ${YB}REBOOT ${NC}"
 echo -e "  ${RB}13.${NC} ${YB}RENEW CERT XRAYS ${NC}        ${RB}23.${NC} ${YB}XRAY-CORE MENU ${NC}"
 echo -e "  ${RB}14.${NC} ${YB}CHECK VPN STATUS ${NC}        ${RB}24.${NC} ${YB}SWAPRAM MENU ${NC}"
-echo -e "  ${RB}15.${NC} ${YB}CHECK VPN PORT ${NC}          ${RB}25.${NC} ${YB}WARP ${NC}"
+echo -e "  ${RB}15.${NC} ${YB}CHECK VPN PORT ${NC}          ${RB}25.${NC} ${YB}Instal/WARP ${NC}"
+echo -e "                                                   ${RB}26.${NC} ${YB}MENU WARP ${NC}"
 echo -e ""
 echo -e "${BB}————————————————————————————————————————————————————————${NC}"
 echo -e "                 ${WB}»»» Total Bandwidth «««${NC}             "
@@ -168,6 +169,10 @@ wget -q -O /usr/bin/swapram "https://raw.githubusercontent.com/KhaiVpn767/swapra
 25)
 clear
 wget -q -O /usr/sbin/setup2 "https://raw.githubusercontent.com/NevermoreSSH/cfwarp/main/setup.sh" && chmod +x /usr/sbin/setup2 && setup2
+;;
+26)
+clear
+warp
 ;;
 20)
 clear
