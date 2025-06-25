@@ -20,7 +20,8 @@ cpu_usage="$((${cpu_usage1/\.*/} / ${corediilik:-1}))"
 cpu_usage+=" %"
 load_cpu=$(printf '%-3s' "$(top -bn1 | awk '/Cpu/ { cpu = "" 100 - $8 "%" }; END { print cpu }')")
 #Domain & IPVPS
-domain=$(cat /root/domain)
+domain=$(cat /usr/local/etc/xray/domain)
+User=$(cat /usr/local/etc/xray/user)
 IPVPS=$(curl -s ipinfo.io/ip )
 IPVPS=$(curl -sS ipv4.icanhazip.com)
 IPVPS=$(curl -sS ifconfig.me )
