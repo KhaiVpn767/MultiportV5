@@ -10,6 +10,7 @@ dateFromServer=$(curl -v --insecure --silent https://google.com/ 2>&1 | grep Dat
 biji=`date +"%Y-%m-%d" -d "$dateFromServer"`
 #########################
 domain=$(cat /usr/local/etc/xray/domain)
+User=$(cat /usr/local/etc/xray/user)
 IPVPS=$(curl -s ipinfo.io/ip )
 IPVPS=$(curl -sS ipv4.icanhazip.com)
 IPVPS=$(curl -sS ifconfig.me )
