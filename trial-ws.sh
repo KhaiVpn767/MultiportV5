@@ -12,7 +12,7 @@ green() { echo -e "\\033[32;1m${*}\\033[0m"; }
 red() { echo -e "\\033[31;1m${*}\\033[0m"; }
 clear
 MYIP2=$(wget -qO- ipv4.icanhazip.com);
-domain=$(cat /root/domain)
+domain=$(cat /usr/local/etc/xray/domain)
 user=TRIAL-`echo $RANDOM | head -c4`
 uuid=$(cat /proc/sys/kernel/random/uuid)
 masaaktif=1
