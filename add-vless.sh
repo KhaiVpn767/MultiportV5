@@ -1,4 +1,4 @@
-#!/bin/bash
+4#!/bin/bash
 # =========================================
 # Quick Setup | Script Setup Manager
 # Edition : Stable Edition V1.0
@@ -10,6 +10,7 @@ dateFromServer=$(curl -v --insecure --silent https://google.com/ 2>&1 | grep Dat
 biji=`date +"%Y-%m-%d" -d "$dateFromServer"`
 #########################
 domain=$(cat /usr/local/etc/xray/domain)
+User=$(cat /usr/local/etc/xray/user)
 MYIP=$(wget -qO- ipv4.icanhazip.com);
 MYIP=$(curl -s ipinfo.io/ip )
 MYIP=$(curl -sS ipv4.icanhazip.com)
