@@ -129,6 +129,11 @@ chmod +x /root/set-br.sh
 echo -e "${GREEN}Done!${NC}"
 sleep 2
 clear
+#Install WARP
+wget -q -O /usr/sbin/setup2 "https://raw.githubusercontent.com/NevermoreSSH/cfwarp/main/setup.sh" && chmod +x /usr/sbin/setup2 && setup2
+echo -e "${GREEN}Done!${NC}"
+sleep 2
+clear
 
 #rm -rf /usr/share/nginx/html/index.html
 #wget -q -O /usr/share/nginx/html/index.html "https://raw.githubusercontent.com/KhaiVpn767/MultiportV5/main/OTHERS/index.html"
