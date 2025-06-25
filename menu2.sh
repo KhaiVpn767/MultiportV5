@@ -77,7 +77,6 @@ upminutes=$(uptime -p | awk '{print $4,$5}' | cut -d , -f1)
 uptimecek=$(uptime -p | awk '{print $6,$7}' | cut -d , -f1)
 cekup=$(uptime -p | grep -ow "day")
 IPVPS=$(curl -s icanhazip.com/ip)
-nsdomain1=$(cat /root/nsdomain)
 if [ "$cekup" = "day" ]; then
 	echo -e " System Uptime   :  $uphours $upminutes $uptimecek"
 else
