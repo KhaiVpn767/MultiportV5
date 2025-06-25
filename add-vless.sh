@@ -1,4 +1,4 @@
-4#!/bin/bash
+#!/bin/bash
 # =========================================
 # Quick Setup | Script Setup Manager
 # Edition : Stable Edition V1.0
@@ -9,12 +9,11 @@ clear
 dateFromServer=$(curl -v --insecure --silent https://google.com/ 2>&1 | grep Date | sed -e 's/< Date: //')
 biji=`date +"%Y-%m-%d" -d "$dateFromServer"`
 #########################
-PERMISSION
-domain=$(cat /usr/local/etc/xray/domain)
-MYIP2=$(wget -qO- ipv4.icanhazip.com)
-tls="$(cat ~/log-install.txt | grep -w "VLESS WS TLS" | cut -d: -f2 | sed 's/ //g')"
-none="$(cat ~/log-install.txt | grep -w "VLESS WS None TLS" | cut -d: -f2 | sed 's/ //g')"
-until [[ $user =~ ^[a-zA-Z0-9_]+$ && ${CLIENT_EXISTS} == '0' ]]; do
+MYIP=$(wget -qO- ipv4.icanhazip.com);
+MYIP=$(curl -s ipinfo.io/ip )
+MYIP=$(curl -sS ipv4.icanhazip.com)
+MYIP=$(curl -sS ifconfig.me )
+
 red='\e[1;31m'
 green='\e[0;32m'
 NC='\e[0m'
@@ -22,7 +21,7 @@ green() { echo -e "\\033[32;1m${*}\\033[0m"; }
 red() { echo -e "\\033[31;1m${*}\\033[0m"; }
 
 clear
-domain=$(cat /root/domain)
+domain=$(cat /usr/local/etc/xray/domain)
 MYIP2=$(wget -qO- ipv4.icanhazip.com);
 until [[ $user =~ ^[a-zA-Z0-9_]+$ && ${CLIENT_EXISTS} == '0' ]]; do
 		echo -e "\033[0;34m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m"
