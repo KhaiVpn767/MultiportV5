@@ -9,12 +9,12 @@ clear
 dateFromServer=$(curl -v --insecure --silent https://google.com/ 2>&1 | grep Date | sed -e 's/< Date: //')
 biji=`date +"%Y-%m-%d" -d "$dateFromServer"`
 #########################
+PERMISSION
 domain=$(cat /usr/local/etc/xray/domain)
-User=$(cat /usr/local/etc/xray/user)
-MYIP=$(wget -qO- ipv4.icanhazip.com);
-MYIP=$(curl -s ipinfo.io/ip )
-MYIP=$(curl -sS ipv4.icanhazip.com)
-MYIP=$(curl -sS ifconfig.me )
+MYIP2=$(wget -qO- ipv4.icanhazip.com)
+tls="$(cat ~/log-install.txt | grep -w "VLESS WS TLS" | cut -d: -f2 | sed 's/ //g')"
+none="$(cat ~/log-install.txt | grep -w "VLESS WS None TLS" | cut -d: -f2 | sed 's/ //g')"
+until [[ $user =~ ^[a-zA-Z0-9_]+$ && ${CLIENT_EXISTS} == '0' ]]; do
 red='\e[1;31m'
 green='\e[0;32m'
 NC='\e[0m'
