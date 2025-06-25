@@ -9,10 +9,10 @@ clear
 dateFromServer=$(curl -v --insecure --silent https://google.com/ 2>&1 | grep Date | sed -e 's/< Date: //')
 biji=`date +"%Y-%m-%d" -d "$dateFromServer"`
 #########################
-MYIP=$(wget -qO- ipv4.icanhazip.com);
-MYIP=$(curl -s ipinfo.io/ip )
-MYIP=$(curl -sS ipv4.icanhazip.com)
-MYIP=$(curl -sS ifconfig.me )
+domain=$(cat /usr/local/etc/xray/domain)
+IPVPS=$(curl -s ipinfo.io/ip )
+IPVPS=$(curl -sS ipv4.icanhazip.com)
+IPVPS=$(curl -sS ifconfig.me )
 
 red='\e[1;31m'
 green='\e[0;32m'
