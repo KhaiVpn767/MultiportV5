@@ -33,7 +33,7 @@ green() { echo -e "\\033[32;1m${*}\\033[0m"; }
 red() { echo -e "\\033[31;1m${*}\\033[0m"; }
 
 clear
-domain=$(cat /root/domain)
+domain=$(cat /usr/local/etc/xray/domain)
 MYIP2=$(wget -qO- ipv4.icanhazip.com);
 until [[ $user =~ ^[a-zA-Z0-9_]+$ && ${CLIENT_EXISTS} == '0' ]]; do
 echo -e "\033[0;34m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m"

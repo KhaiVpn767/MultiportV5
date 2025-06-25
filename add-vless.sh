@@ -458,7 +458,7 @@ echo -e "Expired On  : $exp"
 echo -e "ID          : ${uuid}"
 echo -e "═══════════════════"
 echo -e ""
-echo -e "Script Mod By KhaiVpn767"
+echo -e "Script Mod By KhaiVPN"
 echo ""
 read -p "$( echo -e "Press ${orange}[ ${NC}${green}Enter${NC} ${CYAN}]${NC} Back to menu . . .") "
-menu
+menu-vless

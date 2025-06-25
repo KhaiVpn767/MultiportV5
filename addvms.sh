@@ -69,7 +69,7 @@ PUB=$(cat /etc/slowdns/server.pub)
 NS=$(cat /etc/xray/dns)
 source /var/lib/kyt/ipvps.conf
 if [[ "$IP" = "" ]]; then
-domain=$(cat /etc/xray/domain)
+domain=$(cat /usr/local/etc/xray/domain)
 else
 domain=$IP
 fi
