@@ -1,12 +1,11 @@
 #!/bin/bash
 # //====================================================
 # //	System Request:Debian 9+/Ubuntu 18.04+/20+
-# //	Author:	Julak Bantur
-# //	Dscription: Xray MultiPort
-# //	email: putrameratus2@gmail.com
-# //  telegram: https://t.me/Cibut2d
+# //	Author:	zaki
+# //	Dscription: Xray Menu Management
+# //	email: zaki20211@gmail.com
 # //====================================================
-# // font color configuration | JULAK BANTUR AUTOSCRIPT
+# // font color configuration | khaiVPN AUTOSCRIPT
 ###########- COLOR CODE -##############
 VC="\e[0m"
 Green="\e[92;1m"
@@ -37,6 +36,11 @@ export TIME="10"
 export URL="https://api.telegram.org/bot$KEY/sendMessage"
 clear
 #IZIN SCRIPT
+MYIP=$(curl -sS ipv4.icanhazip.com)
+echo -e "\e[32mloading...\e[0m"
+clear
+# Valid Script
+
 clear
 PUB=$(cat /etc/slowdns/server.pub)
 NS=$(cat /etc/xray/dns)
@@ -48,7 +52,7 @@ until [[ $user =~ ^[a-zA-Z0-9_]+$ && ${CLIENT_EXISTS} == '0' ]]; do
   echo -e "\033[1;93m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m"
 
   read -rp "User: " -e user
-  CLIENT_EXISTS=$(grep -w $user /etc/xray/config.json | wc -l)
+  CLIENT_EXISTS=$(grep -w $user /usr/local/etc/xray/vless.json | wc -l)
 
   if [[ ${CLIENT_EXISTS} == '1' ]]; then
     clear
@@ -66,7 +70,7 @@ done
 #JanganLupaMakanYa
 read -p "Uuid (Manual): " uuid
 read -p "Expired (days): " masaaktif
-read -p "Bug (Host): " bug
+#read -p "Bug (Host): " bug
 read -p "Limit User (IP): " iplimit
 read -p "Limit User (GB): " Quota
 #JanganLupaMakanYa
@@ -80,13 +84,25 @@ thn2=$(date +"%Y")
 tnggl="$tgl2 $bln2, $thn2"
 exp=$(date -d "$masaaktif days" +"%Y-%m-%d")
 sed -i '/#vless$/a\#& '"$user $exp $uuid"'\
-},{"id": "'""$uuid""'","email": "'""$user""'"' /etc/xray/config.json
+},{"id": "'""$uuid""'","email": "'""$user""'"' /usr/local/etc/xray/vless.json
 sed -i '/#vlessgrpc$/a\#vlg '"$user $exp $uuid"'\
-},{"id": "'""$uuid""'","email": "'""$user""'"' /etc/xray/config.json
+},{"id": "'""$uuid""'","email": "'""$user""'"' /usr/local/etc/xray/vnone.json
 #JanganLupaMakanYa
 vlesslink1="vless://${uuid}@${domain}:443?path=/vless&security=tls&encryption=none&host=${domain}&type=ws&sni=${bug}#${user}"
 vlesslink2="vless://${uuid}@${bug}:80?path=/vless&security=none&encryption=none&host=${domain}&type=ws#${user}"
 vlesslink3="vless://${uuid}@${domain}:443?mode=gun&security=tls&encryption=none&type=grpc&serviceName=vless-grpc&sni=${bug}#${user}"
+vlesslink4="vless://${uuid}@104.16.210.12:80?path=/vless&encryption=none&host=www.speedtest.net.${domain}&type=ws#DIGI-EXP-${user}"
+vlesslink5="vless://${uuid}@api.useinsider.com:80?path=/vless&encryption=none&host=${sts}${domain}&type=ws#DIGI-APN-${user}"
+vlesslink6="vless://${uuid}@162.159.134.61:80?path=/vless&encryption=none&host=${sts}${domain}&type=ws#DIGI-BOSSTER-${user}"
+vlesslink7="vless://${uuid}@172.66.40.170:80?path=/vless&encryption=none&host=cdn.opensignal.com.${domain}&type=ws#DIGI-BOSSTER-V2-${user}"
+vlesslink8="vless://${uuid}@${domain}:80?path=/vless&encryption=none&host=m.pubgmobile.com&type=ws#UMOBILE-FUNZ-${user}"
+vlesslink9="vless://${uuid}@104.18.8.53:80?path=/vless&encryption=none&host=${domain}&type=ws#UMOBILE-${user}"
+vlesslink10="vless://${uuid}@104.17.113.188:80?path=/vless&encryption=none&host=eurohealthobservatory.who.int.${domain}&type=ws#YES-${user}"
+vlesslink11="vless://${uuid}@104.17.147.22:80?path=/vless&encryption=none&host=www.speedtest.net.${domain}&type=ws#SELCOM-BOSTER-3MBPS-${user}"
+vlesslink12="vless://${uuid}@104.17.10.12:80?path=/vless&encryption=none&host=cdn.who.int.${domain}&type=ws#UNIFI-Bebas-${user}"
+vlesslink13="vless://${uuid}@speedtest.unifi.com.my.${domain}:80?path=/vless&encryption=none&host=&type=ws#Uni5G-${user}"
+vlesslink14="vless://${uuid}@104.18.6.178:80?path=/vless&encryption=none&host=speedtest-univ-results-api.speedtest.net.${domain}&type=ws#MAXIS-FREEZE-${user}"
+vlesslink15="vless://${uuid}@cdn.opensignal.com:80?path=/vless&encryption=none&host=cdn.opensignal.com.${domain}&type=ws#MAXIS-FREEZE-V2-${user}"
 #JanganLupaMakanYa
 if [ ! -e /etc/vless ]; then
   mkdir -p /etc/vless
@@ -171,18 +187,54 @@ Format Vless gRPC (SNI)
   grpc-mode: gun
     grpc-service-name: vless-grpc
 
----------------------
-Link Akun Vless 
----------------------
+◇━━━━━━━━━━━━━━━━━◇
+# Link Vless Account
+◇━━━━━━━━━━━━━━━━━◇
 Link TLS      : 
 ${vlesslink1}
----------------------
+◇━━━━━━━━━━━━━━━━━◇
 Link none TLS : 
 ${vlesslink2}
----------------------
+◇━━━━━━━━━━━━━━━━━◇
 Link GRPC     : 
 ${vlesslink3}
----------------------
+◇━━━━━━━━━━━━━━━━━◇
+Link none TLS : 
+${vlesslink4}
+◇━━━━━━━━━━━━━━━━━◇
+Link none TLS : 
+${vlesslink5}
+◇━━━━━━━━━━━━━━━━━◇
+Link none TLS : 
+${vlesslink6}
+◇━━━━━━━━━━━━━━━━━◇
+Link none TLS : 
+${vlesslink7}
+◇━━━━━━━━━━━━━━━━━◇
+Link none TLS : 
+${vlesslink8}
+◇━━━━━━━━━━━━━━━━━◇
+Link none TLS : 
+${vlesslink9}
+◇━━━━━━━━━━━━━━━━━◇
+Link none TLS : 
+${vlesslink10}
+◇━━━━━━━━━━━━━━━━━◇
+Link none TLS : 
+${vlesslink11}
+◇━━━━━━━━━━━━━━━━━◇
+Link none TLS : 
+${vlesslink12}
+◇━━━━━━━━━━━━━━━━━◇
+Link none TLS : 
+${vlesslink13}
+◇━━━━━━━━━━━━━━━━━◇
+Link none TLS : 
+${vlesslink14}
+◇━━━━━━━━━━━━━━━━━◇
+Link none TLS : 
+${vlesslink15}
+◇━━━━━━━━━━━━━━━━━◇
 
 
 END
@@ -196,33 +248,77 @@ echo -e " CREATE VLESS ACCOUNT           "
 echo -e "${z}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━${NC}"
 echo -e "Remarks       : ${user}"
 echo -e "Host          : ${domain}"
-echo -e "Host XrayDns  : ${NS}"
-echo -e "Public Key    : ${PUB}"
+#echo -e "Host XrayDns  : ${NS}"
+#echo -e "Public Key    : ${PUB}"
 echo -e "Limit Ip      : ${iplimit} Login"
-echo -e "Limit Quota : ${Quota} GB"
+#echo -e "Limit Quota : ${Quota} GB"
 echo -e "Port TLS      : 443"
 echo -e "Port gRPC     : 443"
 echo -e "Port None TLS : 80"
-echo -e "Port XrayDns  : 443,5300,53,80"
+#echo -e "Port XrayDns  : 443,5300,53,80"
 echo -e "User ID       : ${uuid}"
 echo -e "Encryption    : none"
 echo -e "Path          : /vless ~ (/Multipath)"
 echo -e "ServiceName   : vless-grpc"
-echo -e "${z}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━${NC}"
+echo -e "${z}☉————————————————————☉${NC}"
 echo -e "Link TLS    :"
 echo -e "${vlesslink1}"
-echo -e "${z}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━${NC}"
+echo -e "${z}☉————————————————————☉${NC}"
 echo -e "Link NTLS   :"
 echo -e "${vlesslink2}"
-echo -e "${z}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━${NC}"
+echo -e "${z}☉————————————————————☉${NC}"
 echo -e "Link GRPC   :"
 echo -e "${vlesslink3}"
-echo -e "${z}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━${NC}"
+echo -e "${z}☉————————————————————☉${NC}"
+echo -e "Link DIGI-EXP   :"
+echo -e "${vlesslink4}"
+echo -e "${z}☉————————————————————☉${NC}"
+echo -e "Link DIGI-APN :"
+echo -e "${vlesslink5}"
+echo -e "${z}☉—————————————————☉${NC}"
+echo -e "${z}☉————————————————————☉${NC}"
+echo -e "Link DIGI-BOSSTER   :"
+echo -e "${vlesslink6}"
+echo -e "${z}☉————————————————————☉${NC}"
+echo -e "Link DIGI-BOSSTER-V2        :"
+echo -e "${vlesslink7}"
+echo -e "${z}☉————————————————————☉${NC}"
+echo -e "Link Umobile-funz            :"
+echo -e "${vlesslink8}"
+echo -e "${z}☉————————————————————☉${NC}"
+echo -e "Link UMOBILE    :"
+echo -e "${vlesslink9}"
+echo -e "${z}☉————————————————————☉${NC}"
+echo -e "Link YES    :"
+echo -e "${vlesslink10}"
+echo -e "${z}☉————————————————————☉${NC}"
+echo -e "Link SELCOM-BOSTER-3MBPS   :"
+echo -e "${vlesslink11}"
+echo -e "${z}☉————————————————————☉${NC}"
+echo -e "Link UNIFI-Bebas   :"
+echo -e "${vlesslink12}"
+echo -e "${z}☉————————————————————☉${NC}"
+echo -e "Link UNIFI-Uni5G   :"
+echo -e "${vlesslink13}"
+echo -e "${z}☉————————————————————☉${NC}"
+echo -e "Link MAXIS-FREEZE   :"
+echo -e "${vlesslink14t}"
+echo -e "${z}☉————————————————————☉${NC}"
+echo -e "Link MAXIS-FREEZE-V2   :"
+echo -e "${vlesslink15}"
+echo -e "${z}☉————————————————————☉${NC}"
 echo -e "Format OpenClash : https://${domain}:81/vless-$user.txt"
+echo -e "${z}☉—————————————————☉${NC}"
+echo -e "Remarks       : ${user}"
+echo -e "Host          : ${domain}"
+echo -e "Aktif Selama  : $masaaktif Hari"
+echo -e "Dibuat Pada   : $tnggl"
+echo -e "Exp-comfig    : $expe"
+echo -e "User ID       : ${uuid}"
+echo -e "Telco         : Telco"
+echo -e "${z}☉—————————————————☉${NC}"
 echo -e "${z}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━${NC}"
-echo -e "Masa Aktif    : $expe"
-echo -e "${z}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━${NC}"
-echo -e "        Script By Malayaacx01 - Shop             "
+echo -e "              Script By zaki/tunnel            "
 echo -e "${z}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━${NC}"
 echo -e ""
 read -n 1 -s -r -p "Press any key to back on menu"
