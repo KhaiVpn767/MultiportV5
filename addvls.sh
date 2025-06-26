@@ -74,19 +74,19 @@ read -p "Expired (days): " masaaktif
 #read -p "Limit User (IP): " iplimit
 #read -p "Limit User (GB): " Quota
 #JanganLupaMakanYa
-tgl=$(date -d "$masaaktif days" +"%d")
-bln=$(date -d "$masaaktif days" +"%b")
-thn=$(date -d "$masaaktif days" +"%Y")
-expe="$tgl $bln, $thn"
-tgl2=$(date +"%d")
-bln2=$(date +"%b")
-thn2=$(date +"%Y")
-tnggl="$tgl2 $bln2, $thn2"
-exp=$(date -d "$masaaktif days" +"%Y-%m-%d")
-sed -i '/#vless$/a\#& '"$user $exp $uuid"'\
+uuid=$(cat /proc/sys/kernel/random/uuid)
+exp=`date -d "$masaaktif days" +"%Y-%m-%d"`
+hariini=`date -d "0 days" +"%Y-%m-%d"`
+
+sed -i '/#tls$/a\### '"$user $exp"'\
 },{"id": "'""$uuid""'","email": "'""$user""'"' /usr/local/etc/xray/vless.json
-sed -i '/#vlessgrpc$/a\#vlg '"$user $exp $uuid"'\
+sed -i '/#none$/a\### '"$user $exp"'\
 },{"id": "'""$uuid""'","email": "'""$user""'"' /usr/local/etc/xray/vnone.json
+
+# Restart Service
+systemctl restart xray@vless.service
+systemctl restart xray@vnone.service
+service cron restart
 #JanganLupaMakanYa
 vlesslink1="vless://${uuid}@${domain}:443?path=/vless&security=tls&encryption=none&host=${domain}&type=ws&sni=${bug}#${user}"
 vlesslink2="vless://${uuid}@${bug}:80?path=/vless&security=none&encryption=none&host=${domain}&type=ws#${user}"
