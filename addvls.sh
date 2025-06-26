@@ -43,7 +43,7 @@ clear
 ipsaya=$(curl -sS ipv4.icanhazip.com)
 data_server=$(curl -v --insecure --silent https://google.com/ 2>&1 | grep Date | sed -e 's/< Date: //')
 date_list=$(date +"%Y-%m-%d" -d "$data_server")
-data_ip="https://raw.githubusercontent.com/KhaiVpn767/MultiportV5/main/"
+data_ip="https://raw.githubusercontent.com/KhaiVpn767/allow/main/ipvps.conf"
 checking_sc() {
   useexp=$(wget -qO- $data_ip | grep $ipsaya | awk '{print $3}')
   if [[ $date_list < $useexp ]]; then
@@ -68,7 +68,7 @@ echo -e "\e[32mloading...\e[0m"
 clear
 PUB=$(cat /etc/slowdns/server.pub)
 NS=$(cat /etc/xray/dns)
-domain=$(cat /etc/xray/domain)
+domain=$(cat /usr/local/etc/xray/domain)
 clear
 until [[ $user =~ ^[a-zA-Z0-9_]+$ && ${CLIENT_EXISTS} == '0' ]]; do
   echo -e "\033[1;93m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m"
