@@ -44,7 +44,7 @@ clear
 clear
 PUB=$(cat /etc/slowdns/server.pub)
 NS=$(cat /etc/xray/dns)
-domain=$(cat /etc/xray/domain)
+domain=$(cat /usr/local/etc/xray/domain)
 clear
 until [[ $user =~ ^[a-zA-Z0-9_]+$ && ${CLIENT_EXISTS} == '0' ]]; do
   echo -e "\033[1;93m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m"
@@ -71,8 +71,8 @@ done
 read -p "Uuid (Manual): " uuid
 read -p "Expired (days): " masaaktif
 #read -p "Bug (Host): " bug
-read -p "Limit User (IP): " iplimit
-read -p "Limit User (GB): " Quota
+#read -p "Limit User (IP): " iplimit
+#read -p "Limit User (GB): " Quota
 #JanganLupaMakanYa
 tgl=$(date -d "$masaaktif days" +"%d")
 bln=$(date -d "$masaaktif days" +"%b")
