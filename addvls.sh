@@ -104,222 +104,377 @@ vlesslink13="vless://${uuid}@speedtest.unifi.com.my.${domain}:80?path=/vless&enc
 vlesslink14="vless://${uuid}@104.18.6.178:80?path=/vless&encryption=none&host=speedtest-univ-results-api.speedtest.net.${domain}&type=ws#MAXIS-FREEZE-${user}"
 vlesslink15="vless://${uuid}@cdn.opensignal.com:80?path=/vless&encryption=none&host=cdn.opensignal.com.${domain}&type=ws#MAXIS-FREEZE-V2-${user}"
 #JanganLupaMakanYa
-if [ ! -e /etc/vless ]; then
-  mkdir -p /etc/vless
-fi
+cat > /home/vps/public_html/$user-$exp-VLESSTLS.yaml <<EOF
+port: 7890
+socks-port: 7891
+redir-port: 7892
+mixed-port: 7893
+tproxy-port: 7895
+ipv6: false
+mode: rule
+log-level: silent
+allow-lan: true
+external-controller: 0.0.0.0:9090
+secret: ""
+bind-address: "*"
+unified-delay: true
+profile:
+  store-selected: true
+  store-fake-ip: true
+dns:
+  enable: true
+  ipv6: false
+  use-host: true
+  enhanced-mode: fake-ip
+  listen: 0.0.0.0:7874
+  nameserver:
+    - 8.8.8.8
+    - 1.0.0.1
+    - https://dns.google/dns-query
+  fallback:
+    - 1.1.1.1
+    - 8.8.4.4
+    - https://cloudflare-dns.com/dns-query
+    - 112.215.203.254
+  default-nameserver:
+    - 8.8.8.8
+    - 1.1.1.1
+    - 112.215.203.254
+  fake-ip-range: 198.18.0.1/16
+  fake-ip-filter:
+    - "*.lan"
+    - "*.localdomain"
+    - "*.example"
+    - "*.invalid"
+    - "*.localhost"
+    - "*.test"
+    - "*.local"
+    - "*.home.arpa"
+    - time.*.com
+    - time.*.gov
+    - time.*.edu.cn
+    - time.*.apple.com
+    - time1.*.com
+    - time2.*.com
+    - time3.*.com
+    - time4.*.com
+    - time5.*.com
+    - time6.*.com
+    - time7.*.com
+    - ntp.*.com
+    - ntp1.*.com
+    - ntp2.*.com
+    - ntp3.*.com
+    - ntp4.*.com
+    - ntp5.*.com
+    - ntp6.*.com
+    - ntp7.*.com
+    - "*.time.edu.cn"
+    - "*.ntp.org.cn"
+    - +.pool.ntp.org
+    - time1.cloud.tencent.com
+    - music.163.com
+    - "*.music.163.com"
+    - "*.126.net"
+    - musicapi.taihe.com
+    - music.taihe.com
+    - songsearch.kugou.com
+    - trackercdn.kugou.com
+    - "*.kuwo.cn"
+    - api-jooxtt.sanook.com
+    - api.joox.com
+    - joox.com
+    - y.qq.com
+    - "*.y.qq.com"
+    - streamoc.music.tc.qq.com
+    - mobileoc.music.tc.qq.com
+    - isure.stream.qqmusic.qq.com
+    - dl.stream.qqmusic.qq.com
+    - aqqmusic.tc.qq.com
+    - amobile.music.tc.qq.com
+    - "*.xiami.com"
+    - "*.music.migu.cn"
+    - music.migu.cn
+    - "*.msftconnecttest.com"
+    - "*.msftncsi.com"
+    - msftconnecttest.com
+    - msftncsi.com
+    - localhost.ptlogin2.qq.com
+    - localhost.sec.qq.com
+    - +.srv.nintendo.net
+    - +.stun.playstation.net
+    - xbox.*.microsoft.com
+    - xnotify.xboxlive.com
+    - +.battlenet.com.cn
+    - +.wotgame.cn
+    - +.wggames.cn
+    - +.wowsgame.cn
+    - +.wargaming.net
+    - proxy.golang.org
+    - stun.*.*
+    - stun.*.*.*
+    - +.stun.*.*
+    - +.stun.*.*.*
+    - +.stun.*.*.*.*
+    - heartbeat.belkin.com
+    - "*.linksys.com"
+    - "*.linksyssmartwifi.com"
+    - "*.router.asus.com"
+    - mesu.apple.com
+    - swscan.apple.com
+    - swquery.apple.com
+    - swdownload.apple.com
+    - swcdn.apple.com
+    - swdist.apple.com
+    - lens.l.google.com
+    - stun.l.google.com
+    - +.nflxvideo.net
+    - "*.square-enix.com"
+    - "*.finalfantasyxiv.com"
+    - "*.ffxiv.com"
+    - "*.mcdn.bilivideo.cn"
+    - +.media.dssott.com
+proxies:
+  - name: XRAY_VLESS_TLS_${user}
+    server: ${sts}${domain}
+    port: 443
+    type: vless
+    uuid: ${uuid}
+    cipher: auto
+    tls: true
+    skip-cert-verify: true
+    servername: ${sni}
+    network: ws
+    ws-opts:
+      path: /vless-tls
+      headers:
+        Host: ${domain}
+    udp: true
+proxy-groups:
+  - name: KhaiVpn767-Autoscript
+    type: select
+    proxies:
+      - XRAY_VLESS_TLS_${user}
+      - DIRECT
+rules:
+  - MATCH,KhaiVpn767-Autoscript
+EOF
 
-if [[ $iplimit -gt 0 ]]; then
-mkdir -p /etc/kyt/limit/vless/ip
-echo -e "$iplimit" > /etc/kyt/limit/vless/ip/$user
-else
-echo > /dev/null
-fi
+cat > /home/vps/public_html/$user-$exp-VLESSNTLS.yaml <<EOF
+port: 7890
+socks-port: 7891
+redir-port: 7892
+mixed-port: 7893
+tproxy-port: 7895
+ipv6: false
+mode: rule
+log-level: silent
+allow-lan: true
+external-controller: 0.0.0.0:9090
+secret: ""
+bind-address: "*"
+unified-delay: true
+profile:
+  store-selected: true
+  store-fake-ip: true
+dns:
+  enable: true
+  ipv6: false
+  use-host: true
+  enhanced-mode: fake-ip
+  listen: 0.0.0.0:7874
+  nameserver:
+    - 8.8.8.8
+    - 1.0.0.1
+    - https://dns.google/dns-query
+  fallback:
+    - 1.1.1.1
+    - 8.8.4.4
+    - https://cloudflare-dns.com/dns-query
+    - 112.215.203.254
+  default-nameserver:
+    - 8.8.8.8
+    - 1.1.1.1
+    - 112.215.203.254
+  fake-ip-range: 198.18.0.1/16
+  fake-ip-filter:
+    - "*.lan"
+    - "*.localdomain"
+    - "*.example"
+    - "*.invalid"
+    - "*.localhost"
+    - "*.test"
+    - "*.local"
+    - "*.home.arpa"
+    - time.*.com
+    - time.*.gov
+    - time.*.edu.cn
+    - time.*.apple.com
+    - time1.*.com
+    - time2.*.com
+    - time3.*.com
+    - time4.*.com
+    - time5.*.com
+    - time6.*.com
+    - time7.*.com
+    - ntp.*.com
+    - ntp1.*.com
+    - ntp2.*.com
+    - ntp3.*.com
+    - ntp4.*.com
+    - ntp5.*.com
+    - ntp6.*.com
+    - ntp7.*.com
+    - "*.time.edu.cn"
+    - "*.ntp.org.cn"
+    - +.pool.ntp.org
+    - time1.cloud.tencent.com
+    - music.163.com
+    - "*.music.163.com"
+    - "*.126.net"
+    - musicapi.taihe.com
+    - music.taihe.com
+    - songsearch.kugou.com
+    - trackercdn.kugou.com
+    - "*.kuwo.cn"
+    - api-jooxtt.sanook.com
+    - api.joox.com
+    - joox.com
+    - y.qq.com
+    - "*.y.qq.com"
+    - streamoc.music.tc.qq.com
+    - mobileoc.music.tc.qq.com
+    - isure.stream.qqmusic.qq.com
+    - dl.stream.qqmusic.qq.com
+    - aqqmusic.tc.qq.com
+    - amobile.music.tc.qq.com
+    - "*.xiami.com"
+    - "*.music.migu.cn"
+    - music.migu.cn
+    - "*.msftconnecttest.com"
+    - "*.msftncsi.com"
+    - msftconnecttest.com
+    - msftncsi.com
+    - localhost.ptlogin2.qq.com
+    - localhost.sec.qq.com
+    - +.srv.nintendo.net
+    - +.stun.playstation.net
+    - xbox.*.microsoft.com
+    - xnotify.xboxlive.com
+    - +.battlenet.com.cn
+    - +.wotgame.cn
+    - +.wggames.cn
+    - +.wowsgame.cn
+    - +.wargaming.net
+    - proxy.golang.org
+    - stun.*.*
+    - stun.*.*.*
+    - +.stun.*.*
+    - +.stun.*.*.*
+    - +.stun.*.*.*.*
+    - heartbeat.belkin.com
+    - "*.linksys.com"
+    - "*.linksyssmartwifi.com"
+    - "*.router.asus.com"
+    - mesu.apple.com
+    - swscan.apple.com
+    - swquery.apple.com
+    - swdownload.apple.com
+    - swcdn.apple.com
+    - swdist.apple.com
+    - lens.l.google.com
+    - stun.l.google.com
+    - +.nflxvideo.net
+    - "*.square-enix.com"
+    - "*.finalfantasyxiv.com"
+    - "*.ffxiv.com"
+    - "*.mcdn.bilivideo.cn"
+    - +.media.dssott.com
+proxies:
+  - name: XRAY_VLESS_NTLS_${user}
+    server: ${sts}${domain}
+    port: 80
+    type: vless
+    uuid: ${uuid}
+    cipher: auto
+    tls: false
+    skip-cert-verify: true
+    servername: ${sni}
+    network: ws
+    ws-opts:
+      path: /vless-ntls
+      headers:
+        Host: ${domain}
+    udp: true
+proxy-groups:
+  - name: KhaiVpn767-Autoscript
+    type: select
+    proxies:
+      - XRAY_VLESS_NTLS_${user}
+      - DIRECT
+rules:
+  - MATCH,KhaiVpn767-Autoscript
+EOF
 
-if [ -z ${Quota} ]; then
-  Quota="0"
-fi
-
-c=$(echo "${Quota}" | sed 's/[^0-9]*//g')
-d=$((${c} * 1024 * 1024 * 1024))
-
-if [[ ${c} != "0" ]]; then
-  echo "${d}" >/etc/vless/${user}
-fi
-DATADB=$(cat /etc/vless/.vless.db | grep "^###" | grep -w "${user}" | awk '{print $2}')
-if [[ "${DATADB}" != '' ]]; then
-  sed -i "/\b${user}\b/d" /etc/vless/.vless.db
-fi
-echo "### ${user} ${exp} ${uuid} ${Quota} ${iplimit}" >>/etc/vless/.vless.db
-clear
-cat >/var/www/html/vless-$user.txt <<-END
-
----------------------
-Format Vless WS TLS
----------------------
-- name: Vless-$user-WS TLS
-  server: ${domain}
-  port: 443
-  type: vless
-  uuid: ${uuid}
-  cipher: auto
-  tls: true
-  skip-cert-verify: true
-  servername: ${domain}
-  network: ws
-  ws-opts:
-    path: /vless
-    headers:
-      Host: ${domain}
-
----------------------
-Format Vless WS Non TLS
----------------------
-- name: Vless-$user-WS (CDN) Non TLS
-  server: ${domain}
-  port: 80
-  type: vless
-  uuid: ${uuid}
-  cipher: auto
-  tls: false
-  skip-cert-verify: false
-  servername: ${domain}
-  network: ws
-  ws-opts:
-    path: /vless
-    headers:
-      Host: ${domain}
-  udp: true
-
----------------------
-Format Vless gRPC (SNI)
----------------------
-- name: Vless-$user-gRPC (SNI)
-  server: ${domain}
-  port: 443
-  type: vless
-  uuid: ${uuid}
-  cipher: auto
-  tls: true
-  skip-cert-verify: true
-  servername: ${domain}
-  network: grpc
-  grpc-opts:
-  grpc-mode: gun
-    grpc-service-name: vless-grpc
-
-◇━━━━━━━━━━━━━━━━━◇
-# Link Vless Account
-◇━━━━━━━━━━━━━━━━━◇
-Link TLS      : 
-${vlesslink1}
-◇━━━━━━━━━━━━━━━━━◇
-Link none TLS : 
-${vlesslink2}
-◇━━━━━━━━━━━━━━━━━◇
-Link GRPC     : 
-${vlesslink3}
-◇━━━━━━━━━━━━━━━━━◇
-Link none TLS : 
-${vlesslink4}
-◇━━━━━━━━━━━━━━━━━◇
-Link none TLS : 
-${vlesslink5}
-◇━━━━━━━━━━━━━━━━━◇
-Link none TLS : 
-${vlesslink6}
-◇━━━━━━━━━━━━━━━━━◇
-Link none TLS : 
-${vlesslink7}
-◇━━━━━━━━━━━━━━━━━◇
-Link none TLS : 
-${vlesslink8}
-◇━━━━━━━━━━━━━━━━━◇
-Link none TLS : 
-${vlesslink9}
-◇━━━━━━━━━━━━━━━━━◇
-Link none TLS : 
-${vlesslink10}
-◇━━━━━━━━━━━━━━━━━◇
-Link none TLS : 
-${vlesslink11}
-◇━━━━━━━━━━━━━━━━━◇
-Link none TLS : 
-${vlesslink12}
-◇━━━━━━━━━━━━━━━━━◇
-Link none TLS : 
-${vlesslink13}
-◇━━━━━━━━━━━━━━━━━◇
-Link none TLS : 
-${vlesslink14}
-◇━━━━━━━━━━━━━━━━━◇
-Link none TLS : 
-${vlesslink15}
-◇━━━━━━━━━━━━━━━━━◇
-
-
-END
-
-systemctl restart xray
-systemctl restart nginx
 clear
 echo -e ""
-echo -e "${z}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━${NC}"
-echo -e " CREATE VLESS ACCOUNT           "
-echo -e "${z}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━${NC}"
-echo -e "Remarks       : ${user}"
-echo -e "Host          : ${domain}"
-#echo -e "Host XrayDns  : ${NS}"
-#echo -e "Public Key    : ${PUB}"
-echo -e "Limit Ip      : ${iplimit} Login"
-#echo -e "Limit Quota : ${Quota} GB"
-echo -e "Port TLS      : 443"
-echo -e "Port gRPC     : 443"
-echo -e "Port None TLS : 80"
-#echo -e "Port XrayDns  : 443,5300,53,80"
-echo -e "User ID       : ${uuid}"
-echo -e "Encryption    : none"
-echo -e "Path          : /vless ~ (/Multipath)"
-echo -e "ServiceName   : vless-grpc"
-echo -e "${z}☉————————————————————☉${NC}"
-echo -e "Link TLS    :"
-echo -e "${vlesslink1}"
-echo -e "${z}☉————————————————————☉${NC}"
-echo -e "Link NTLS   :"
-echo -e "${vlesslink2}"
-echo -e "${z}☉————————————————————☉${NC}"
-echo -e "Link GRPC   :"
+echo -e "════[XRAY VLESS WS]═════"
+echo -e "Remarks           : ${user}"
+echo -e "Domain            : ${domain}"
+echo -e "IP/Host           : ${MYIP}"
+echo -e "Port TLS          : 443"
+echo -e "Port None TLS     : 80, 8080, 8880"
+echo -e "ID                : ${uuid}"
+echo -e "Security          : TLS"
+echo -e "Encryption        : None"
+echo -e "Network           : WS"
+echo -e "Path TLS          : /vless-tls"
+echo -e "Path NTLS         : /vless-ntls"
+echo -e "Multipath         : /MultiportV5"
+echo -e "═══════════════════"
+echo -e "Link WS TLS       : ${vlesslink1}"
+echo -e "═══════════════════"
+echo -e "Link WS None TLS  : ${vlesslink2}"
+echo -e "═══════════════════"
+echo -e "Link DIGI-BOSSTER"
 echo -e "${vlesslink3}"
-echo -e "${z}☉————————————————————☉${NC}"
-echo -e "Link DIGI-EXP   :"
+echo -e "═══════════════════"
+echo -e "Link DIGI-BOSSTER-V2"
 echo -e "${vlesslink4}"
-echo -e "${z}☉————————————————————☉${NC}"
-echo -e "Link DIGI-APN :"
+echo -e "═══════════════════"
+echo -e "Link UMOBILE-FUNZ"
 echo -e "${vlesslink5}"
-echo -e "${z}☉—————————————————☉${NC}"
-echo -e "${z}☉————————————————————☉${NC}"
-echo -e "Link DIGI-BOSSTER   :"
+echo -e "═══════════════════"
+echo -e "Link UMOBILE"
 echo -e "${vlesslink6}"
-echo -e "${z}☉————————————————————☉${NC}"
-echo -e "Link DIGI-BOSSTER-V2        :"
+echo -e "═══════════════════"
+echo -e "Link YES"
 echo -e "${vlesslink7}"
-echo -e "${z}☉————————————————————☉${NC}"
-echo -e "Link Umobile-funz            :"
+echo -e "═══════════════════"
+echo -e "Link SELCOM-BOSTER-3MBPS"
 echo -e "${vlesslink8}"
-echo -e "${z}☉————————————————————☉${NC}"
-echo -e "Link UMOBILE    :"
+echo -e "═══════════════════"
+echo -e "Link Uni5G"
 echo -e "${vlesslink9}"
-echo -e "${z}☉————————————————————☉${NC}"
-echo -e "Link YES    :"
+echo -e "═══════════════════"
+echo -e "Link MAXIS-FREEZE"
 echo -e "${vlesslink10}"
-echo -e "${z}☉————————————————————☉${NC}"
-echo -e "Link SELCOM-BOSTER-3MBPS   :"
+echo -e "═══════════════════"
+echo -e "Link MAXIS-FREEZE-V2"
 echo -e "${vlesslink11}"
-echo -e "${z}☉————————————————————☉${NC}"
-echo -e "Link UNIFI-Bebas   :"
-echo -e "${vlesslink12}"
-echo -e "${z}☉————————————————————☉${NC}"
-echo -e "Link UNIFI-Uni5G   :"
-echo -e "${vlesslink13}"
-echo -e "${z}☉————————————————————☉${NC}"
-echo -e "Link MAXIS-FREEZE   :"
-echo -e "${vlesslink14t}"
-echo -e "${z}☉————————————————————☉${NC}"
-echo -e "Link MAXIS-FREEZE-V2   :"
-echo -e "${vlesslink15}"
-echo -e "${z}☉————————————————————☉${NC}"
-echo -e "Format OpenClash : https://${domain}:81/vless-$user.txt"
-echo -e "${z}☉—————————————————☉${NC}"
-echo -e "Remarks       : ${user}"
-echo -e "Host          : ${domain}"
-echo -e "Aktif Selama  : $masaaktif Hari"
-echo -e "Dibuat Pada   : $tnggl"
-echo -e "Exp-comfig    : $expe"
-echo -e "User ID       : ${uuid}"
-echo -e "Telco         : Telco"
-echo -e "${z}☉—————————————————☉${NC}"
-echo -e "${z}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━${NC}"
-echo -e "              Script By zaki/tunnel            "
-echo -e "${z}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━${NC}"
+echo -e "═══════════════════"
+echo -e "YAML WS TLS       : http://${MYIP2}:81/$user-VLESSTLS.yaml"
+echo -e "═══════════════════"
+echo -e "YAML WS None TLS  : http://${MYIP2}:81/$user-VLESSNTLS.yaml"
+echo -e "═══════════════════"
+echo -e "Telco       :"
+echo -e "Remarks     : ${user}"
+echo -e "Created On  : $hariini"
+echo -e "Expired On  : $exp"
+echo -e "ID          : ${uuid}"
+echo -e "═══════════════════"
 echo -e ""
-read -n 1 -s -r -p "Press any key to back on menu"
-m-vless
+echo -e "Script Mod By KhaiVPN"
+echo ""
+read -p "$( echo -e "Press ${orange}[ ${NC}${green}Enter${NC} ${CYAN}]${NC} Back to menu . . .") "
+menu-vless
