@@ -5,7 +5,7 @@
 # //	Dscription: Xray Menu Management
 # //	email: zaki20211@gmail.com
 # //====================================================
-# // font color configuration | zaki AUTOSCRIPT
+# // font color configuration | khaiVPN AUTOSCRIPT
 ###########- COLOR CODE -##############
 VC="\e[0m"
 Green="\e[92;1m"
@@ -30,45 +30,24 @@ cyan="\033[1;36m"
 c="\033[5;33m"
 ###########- END COLOR CODE -##########
 # Getting
-export CHATID=$(grep -E "^#bot# " "/etc/bot/.bot.db" | cut -d ' ' -f 3)
-export KEY=$(grep -E "^#bot# " "/etc/bot/.bot.db" | cut -d ' ' -f 2)
-export TIME="10"
-export URL="https://api.telegram.org/bot$KEY/sendMessage"
 clear
-#IZIN SCRIPT
+dateFromServer=$(curl -v --insecure --silent https://google.com/ 2>&1 | grep Date | sed -e 's/< Date: //')
+biji=`date +"%Y-%m-%d" -d "$dateFromServer"`
+#########################
+MYIP=$(wget -qO- ipv4.icanhazip.com);
+MYIP=$(curl -s ipinfo.io/ip )
 MYIP=$(curl -sS ipv4.icanhazip.com)
-echo -e "\e[32mloading...\e[0m"
+MYIP=$(curl -sS ifconfig.me )
+
+red='\e[1;31m'
+green='\e[0;32m'
+NC='\e[0m'
+green() { echo -e "\\033[32;1m${*}\\033[0m"; }
+red() { echo -e "\\033[31;1m${*}\\033[0m"; }
+
 clear
-# Valid Script
-ipsaya=$(curl -sS ipv4.icanhazip.com)
-data_server=$(curl -v --insecure --silent https://google.com/ 2>&1 | grep Date | sed -e 's/< Date: //')
-date_list=$(date +"%Y-%m-%d" -d "$data_server")
-data_ip="https://raw.githubusercontent.com/KhaiVpn767/allow/main/ipvps.conf"
-checking_sc() {
-  useexp=$(wget -qO- $data_ip | grep $ipsaya | awk '{print $3}')
-  if [[ $date_list < $useexp ]]; then
-    echo -ne
-  else
-    echo -e "\033[1;93m────────────────────────────────────────────\033[0m"
-    echo -e "\033[42m              zaki/tunnel  | Autoscript          \033[0m"
-    echo -e "\033[1;93m────────────────────────────────────────────\033[0m"
-    echo -e ""
-    echo -e "            ${RED}PERMISSION DENIED !${NC}"
-    echo -e "   \033[0;33mYour VPS${NC} $ipsaya \033[0;33mHas been Banned${NC}"
-    echo -e "     \033[0;33mBuy access permissions for scripts${NC}"
-    echo -e "             \033[0;33mContact Admin :${NC}"
-    echo -e "      ${GREEN}NOT${NC} OOPPPP SORRY"
-    echo -e "\033[1;93m────────────────────────────────────────────\033[0m"
-    sleep 5
-    reboot
-  fi
-}
-checking_sc
-echo -e "\e[32mloading...\e[0m"
-clear
-PUB=$(cat /etc/slowdns/server.pub)
-NS=$(cat /etc/xray/dns)
 domain=$(cat /usr/local/etc/xray/domain)
+MYIP2=$(wget -qO- ipv4.icanhazip.com);
 clear
 until [[ $user =~ ^[a-zA-Z0-9_]+$ && ${CLIENT_EXISTS} == '0' ]]; do
   echo -e "\033[1;93m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m"
@@ -76,7 +55,7 @@ until [[ $user =~ ^[a-zA-Z0-9_]+$ && ${CLIENT_EXISTS} == '0' ]]; do
   echo -e "\033[1;93m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m"
 
   read -rp "User: " -e user
-  CLIENT_EXISTS=$(grep -w $user /etc/xray/config.json | wc -l)
+  CLIENT_EXISTS=$(grep -w $user /usr/local/etc/xray/vless.json | wc -l)
 
   if [[ ${CLIENT_EXISTS} == '1' ]]; then
     clear
@@ -95,8 +74,8 @@ done
 read -p "Uuid (Manual): " uuid
 read -p "Expired (days): " masaaktif
 #read -p "Bug (Host): " bug
-read -p "Limit User (IP): " iplimit
-read -p "Limit User (GB): " Quota
+#read -p "Limit User (IP): " iplimit
+#read -p "Limit User (GB): " Quota
 #JanganLupaMakanYa
 tgl=$(date -d "$masaaktif days" +"%d")
 bln=$(date -d "$masaaktif days" +"%b")
@@ -108,10 +87,15 @@ thn2=$(date +"%Y")
 tnggl="$tgl2 $bln2, $thn2"
 exp=$(date -d "$masaaktif days" +"%Y-%m-%d")
 sed -i '/#vless$/a\#& '"$user $exp $uuid"'\
-},{"id": "'""$uuid""'","email": "'""$user""'"' /etc/xray/config.json
+},{"id": "'""$uuid""'","email": "'""$user""'"' /usr/local/etc/xray/vless.json
 sed -i '/#vlessgrpc$/a\#vlg '"$user $exp $uuid"'\
-},{"id": "'""$uuid""'","email": "'""$user""'"' /etc/xray/config.json
-#JanganLupaMakanYa
+},{"id": "'""$uuid""'","email": "'""$user""'"' /usr/local/etc/xray/vnone.json
+
+# Restart Service
+systemctl restart xray@vless.service
+systemctl restart xray@vnone.service
+service cron restart
+
 vlesslink1="vless://${uuid}@${domain}:443?path=/vless&security=tls&encryption=none&host=${domain}&type=ws&sni=${bug}#${user}"
 vlesslink2="vless://${uuid}@${bug}:80?path=/vless&security=none&encryption=none&host=${domain}&type=ws#${user}"
 vlesslink3="vless://${uuid}@${domain}:443?mode=gun&security=tls&encryption=none&type=grpc&serviceName=vless-grpc&sni=${bug}#${user}"
@@ -326,7 +310,7 @@ echo -e "Link UNIFI-Uni5G   :"
 echo -e "${vlesslink13}"
 echo -e "${z}☉————————————————————☉${NC}"
 echo -e "Link MAXIS-FREEZE   :"
-echo -e "${vlesslink14t}"
+echo -e "${vlesslink14}"
 echo -e "${z}☉————————————————————☉${NC}"
 echo -e "Link MAXIS-FREEZE-V2   :"
 echo -e "${vlesslink15}"
